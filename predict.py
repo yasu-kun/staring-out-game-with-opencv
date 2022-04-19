@@ -41,6 +41,14 @@ def func2():
     cur = con.cursor()
     global cam1_judge_face
 
+    def kong():
+        pygame.mixer.init()
+        pygame.mixer.music.load("./bgm/kong_short.mp3")
+        pygame.mixer.music.play(1)
+        time.sleep(3)
+        pygame.mixer.music.stop()
+
+
     while True:
         cur.execute('SELECT max(id), angry,disgust,fear,happy,sad,surprise,neutral FROM cam1;')
         out = [float(i) for i in cur.fetchall()[0][1:]]
@@ -53,10 +61,12 @@ def func2():
 
         if out.index(max(out))==3 and out[3]>=0.8:
             cam1_judge_face=1
+            kong()
             break
             #print('笑ったね！！！！')
         elif out2.index(max(out2))==3 and out2[3]>=0.8:
             cam1_judge_face=2
+            kong()
             break
         
             
